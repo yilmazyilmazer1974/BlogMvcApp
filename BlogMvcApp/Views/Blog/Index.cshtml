@@ -4,28 +4,29 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Blog Listesi</h2>
 
+<hr />
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Yeni Kategori Ekle", "Create",null, new { @class="btn btn-primary"})
 </p>
-<table class="table">
+
+<hr />
+
+
+<table class="table table-bordered table-striped table-hover table-responsive">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Category.KategoriAdi)
+            @Html.DisplayNameFor(s => s.Id)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Baslik)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Aciklama)
-        </th>
+
         <th>
             @Html.DisplayNameFor(model => model.Resim)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Icerik)
-        </th>
+
         <th>
             @Html.DisplayNameFor(model => model.EklemeTarihi)
         </th>
@@ -38,38 +39,50 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category.KategoriAdi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Baslik)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Aciklama)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Resim)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Icerik)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EklemeTarihi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Onay)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AnaSayfa)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.KategoriAdi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Baslik)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Resim)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.EklemeTarihi)
+            </td>
+            <td>
+                @if (item.Onay == true)
+                {
+                    <label class="label label-success">Onaylı</label>
+                }
+                else
+                {
+                    <label class="label label-danger">Onaylanmadı</label>
+                }
+
+            </td>
+            <td>
+                @if (item.AnaSayfa == true)
+                {
+                    <label class="label label-success">Ana Sayfada</label>
+                }
+                else
+                {
+                    <label class="label label-danger">Ana Sayfada Değil</label>
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id },new { @class="btn btn-warning btn-xs"}) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class="btn btn-primary btn-xs"}) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class="btn btn-danger btn-xs"})
+            </td>
+        </tr>
+    }
 
 </table>
